@@ -66,7 +66,7 @@
                                             <tr>
                                                 <td><input type="checkbox" class=""/></td>
                                                 <td><a href="{{route('articles.show', ['slug' => $article->slug])}}">{{ $article->title }}</a></td>
-                                                <td>{{ $article->slug }}</td>
+                                                <td>{{ $article->content }}</td>
                                                 <td><a class="btn btn-primary btn-xs" href="" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                                                 <td>
                                                     <form class="" action="" method="post">

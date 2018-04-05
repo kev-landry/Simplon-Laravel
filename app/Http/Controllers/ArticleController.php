@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Article;
 
 class ArticleController extends Controller
@@ -14,9 +15,13 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+//        $articles = Article::all();
+	    $articles = Article::orderBy('id', 'DESC')->simplePaginate(5);
 
-        return view('article.index', compact('articles'));
+	    $keyword = Input::get('keyword', '');
+	    $articles_found = Article::SearchKeyword($keyword)->get();
+
+        return view('article.index', compact('articles','keyword', 'articles_found'));
     }
 
     /**
@@ -46,9 +51,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+	    $article = Article::where('slug', $slug)->first();
+
+//	    $article = Article::find($id);
+        return view('article.show', compact('article'));
     }
 
     /**

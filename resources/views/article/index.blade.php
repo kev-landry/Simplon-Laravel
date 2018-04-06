@@ -31,7 +31,7 @@
                                     <h3>Articles</h3>
                                 </div>
                                 <div class="pull-right">
-                                    <a style="margin-top:10px;" href="" class="btn btn-info">Ajouter</a>
+                                    <a style="margin-top:10px;" href="{{route('articles.create')}}" class="btn btn-info">Ajouter</a>
                                 </div>
                             </div>
                         </div>

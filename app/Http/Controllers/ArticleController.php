@@ -31,7 +31,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('article.create');
     }
 
     /**
@@ -42,7 +42,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+	    $request->validate([
+		    'title' => 'bail|required|unique:articles|max:50',
+		    'content' => 'required|max:50',
+		    'is_enabled' => 'required|boolean'
+	    ]);
+
+	    Article::insert([
+		    'title' => $request->title,
+		    'content' => $request->content,
+		    'is_enabled' => $request->is_enabled,
+	    ]);
+
+	    return redirect()->route('articles.index')->with('success', 'L\'article a bien été ajouté !');
     }
 
     /**

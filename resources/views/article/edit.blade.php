@@ -34,37 +34,46 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Editer les informations de l'article: {{$article->title}}</h4>
+                        <h4 class="panel-title">Editer les informations de l'article: <strong>{{$article->title}}</strong></h4>
                     </div>
 
                     <div class="panel-body">
 
 
                         <div class="table-container">
-                            <form method="POST" action="{{ route('user.update', $article->id) }}"  role="form">
+                            <form method="POST" action="{{ route('articles.update', $article->id) }}"  role="form">
                                 {{ csrf_field() }}
                                 <input name="_method" type="hidden" value="PATCH">
                                 <div class="row">
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <div class="form-group">
-                                            <input type="text" name="user_name" value="{{$article->title}}" id="user_name" class="form-control input-sm" placeholder="Nom">
+                                            <input type="text" name="title" value="{{$article->title}}" id="" class="form-control input-sm" placeholder="Title">
                                         </div>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <div class="form-group">
-                                            <input type="email" name="user_email" value="{{$article->content}}" id="user_email" class="form-control input-sm" placeholder="Email">
+                                            <input type="text" name="content" value="{{$article->content}}" id="" class="form-control input-sm" placeholder="Content">
                                         </div>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4">
-                                        <div class="form-group">
-                                            <input type="text" name="user_password" value="{{$article->is_enabled}}" id="user_password" class="form-control input-sm" placeholder="Mot de passe">
+                                        <div class="btn-group" id="status" data-toggle="buttons" style="display: flex">
+                                            <label class="float-left">En stock :</label>
+                                            <label class="btn btn-default btn-on-2 btn-sm active">
+                                                <input type="radio" value="1" name="is_enabled"></label>
+                                            <label class="btn btn-default btn-off-2 btn-sm">
+                                                <input type="radio" value="0" name="is_enabled"></label>
                                         </div>
                                     </div>
+                                    {{--<div class="col-xs-4 col-sm-4 col-md-4">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<input type="text" name="is_enabled" value="{{$article->is_enabled}}" id="" class="form-control input-sm" placeholder="Mot de passe">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <input type="submit"  value="Update" class="btn btn-success btn-block">
-                                        <a href="{{ route('user.index') }}" class="btn btn-info btn-block" >Retour</a>
+                                        <a href="{{ route('articles.index') }}" class="btn btn-info btn-block" >Retour</a>
                                     </div>
                                 </div>
                             </form>

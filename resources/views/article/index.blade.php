@@ -53,7 +53,7 @@
                                                 <td>{{ $article_found->content }}</td>
                                                 <td><a class="btn btn-primary btn-xs" href="{{action('UserController@edit', $article_found->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                                                 <td>
-                                                    <form class="" action="{{ action('UserController@destroy', $article_found->id)}}" method="post">
+                                                    <form class="" action="{{ action('ArticleController@destroy', $article_found->id)}}" method="post">
                                                         {{csrf_field()}}
                                                         <input name="_method" type="hidden" value="delete">
                                                         <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
@@ -67,9 +67,9 @@
                                                 <td><input type="checkbox" class=""/></td>
                                                 <td><a href="{{route('articles.show', ['slug' => $article->slug])}}">{{ $article->title }}</a></td>
                                                 <td>{{ $article->content }}</td>
-                                                <td><a class="btn btn-primary btn-xs" href="" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                                <td><a class="btn btn-primary btn-xs" href="{{route('articles.edit', ['slug' => $article->slug])}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                                                 <td>
-                                                    <form class="" action="" method="post">
+                                                    <form class="" action="{{ action('ArticleController@destroy', $article->id)}}" method="POST">
                                                         {{csrf_field()}}
                                                         <input name="_method" type="hidden" value="delete">
                                                         <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>

@@ -52,6 +52,7 @@ class ArticleController extends Controller
 		    'title' => $request->title,
 		    'content' => $request->content,
 		    'is_enabled' => $request->is_enabled,
+		    'slug' => str_slug($request->title)
 	    ]);
 
 	    return redirect()->route('articles.index')->with('success', 'L\'article a bien été ajouté !');
@@ -77,9 +78,11 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+	    $article = Article::where('slug', $slug)->first();
+
+	    return view('article.edit', compact('article'));
     }
 
     /**
@@ -91,7 +94,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	    $this->validate($request, [
+		    'title' => 'required',
+		    'content' => 'required',
+		    'is_enabled' => 'required',
+	    ]);
+
+	    Article::find($id)->update([
+		    'title' => $request->title,
+		    'content' => $request->content,
+		    'is_enabled' => $request->is_enabled,
+		    'slug' => str_slug($request->title)
+	    ]);
+
+	    return redirect()->route('articles.index')->with('success', 'L\'article a bien été édité !');
     }
 
     /**
@@ -102,6 +118,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+	    Article::find($id)->delete();
+	    return redirect()->route('articles.index')->with('success', 'L\'article a bien été effacé !');
     }
 }
